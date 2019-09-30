@@ -38,7 +38,7 @@ gnome-terminal &
 
 # Step 5: re-login to the server 
 exit
-ssh -L 5901:localhost:5901 -i "airflowvm.pem" ubuntu@ec2-100-27-17-147.compute-1.amazonaws.com
+ssh -L 5901:localhost:5901 -i "airflowvm.pem" ubuntu@#######.#####.amazonaws.com
 
 # Step 6: START VNC SERVER ON UBUNTU
 vncserver -geometry 1920x1080
