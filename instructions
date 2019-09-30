@@ -1,4 +1,4 @@
--- This is the reference link https://linuxconfig.org/how-to-install-gnome-on-ubuntu-18-04-bionic-beaver-linux
+-- This is the reference link https://www.smarthomebeginner.com/setup-vnc-server-on-ubuntu-linux/
 # Step 0: spin up an AWS EC2 instance and ssh into it
 
 # Step 1: PREPARE YOUR SYSTEM FOR UBUNTU VNC SETUP 
