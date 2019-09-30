@@ -1,0 +1,44 @@
+-- This is the reference link https://www.smarthomebeginner.com/setup-vnc-server-on-ubuntu-linux/
+# Step 0: spin up an AWS EC2 instance and ssh into it
+
+# Step 1: PREPARE YOUR SYSTEM FOR UBUNTU VNC SETUP 
+sudo apt-get update && sudo apt-get upgrade
+
+# Step 2: INSTALL A LIGHTWEIGHT DESKTOP ENVIRONMENT
+sudo apt-get install ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal -y
+
+# Step 3: INSTALL VNC SERVER ON UBUNTU
+sudo apt-get -y install tightvncserver
+
+# Step 4: CONFIGURE VNC SERVER ON UBUNTU
+vncserver
+(then set up pwd)
+ps -ef | grep Xtightvnc   (this is to check how many VNCSERVER instances you are running)
+vncserver -kill :1        (kill the instance to configure the VNC configuration file) 
+cp ~/.vnc/xstartup ~/.vnc/xstartup_backup (make a copy first)
+vim ~/.vnc/xstartup
+
+#!/bin/sh
+
+export XKL_XMODMAP_DISABLE=1
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+xsetroot -solid grey
+vncconfig -iconic &
+
+gnome-panel &
+gnome-settings-daemon &
+metacity &
+nautilus &
+gnome-terminal &
+
+
+# Step 5: re-login to the server 
+exit
+ssh -L 5901:localhost:5901 -i "airflowvm.pem" ubuntu@#######.#####.amazonaws.com
+
+# Step 6: START VNC SERVER ON UBUNTU
+vncserver -geometry 1920x1080
