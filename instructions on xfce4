@@ -40,3 +40,28 @@ vncserver -geometry 1920x1080
 # credentials to login to vnc server
 user: localhost:5901
 pwd:  awsgui
+
+------------------------------------- VNC debug ----------------------------------------------
+if below log shows up after you run vncserver -geometry 1920x1080
+/*
+1 is taken because of /tmp/.X1-lock
+Remove this file if there is no X server ip-172-31-76-51:1
+
+Warning: ip-172-31-76-51:2 is taken because of /tmp/.X2-lock
+Remove this file if there is no X server ip-172-31-76-51:2
+
+New 'X' desktop is ip-172-31-76-51:3
+
+Starting applications specified in /home/ubuntu/.vnc/xstartup
+Log file is /home/ubuntu/.vnc/ip-172-31-76-51:3.log
+*/ 
+
+The '3' means that you've been given port 5903. It could be any number. VNC works on ports 5901,
+5902, 5903,... and up.  When there are several users, the server picks the next available port.
+
+use 5903 to login :
+ssh -L 5903:localhost:5903 -i "airflowvm.pem" ubuntu@#######.#####.amazonaws.com
+
+# credentials to login to vnc server
+user: localhost:5903
+pwd:  awsgui
